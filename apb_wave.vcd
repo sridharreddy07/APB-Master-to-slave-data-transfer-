@@ -1,0 +1,513 @@
+$date
+	Sun Mar 15 21:18:35 2026
+$end
+$version
+	QuestaSim Version 10.7c
+$end
+$timescale
+	1ps
+$end
+
+$scope module apb_top_tb $end
+$var reg 1 ! clk $end
+$var reg 1 " rst $end
+$var reg 1 # PSEL $end
+$var reg 1 $ PENABLE $end
+$var reg 1 % PWRITE $end
+$var reg 8 & PADDR [7:0] $end
+$var reg 8 ' PWDATA [7:0] $end
+$var reg 8 ( PRDATA [7:0] $end
+$var reg 1 ) PREADY $end
+
+$scope module master $end
+$var wire 1 * clk $end
+$var wire 1 + rst $end
+$var reg 1 , PSEL $end
+$var reg 1 - PENABLE $end
+$var reg 1 . PWRITE $end
+$var reg 8 / PADDR [7:0] $end
+$var reg 8 0 PWDATA [7:0] $end
+$var wire 1 1 PRDATA [7] $end
+$var wire 1 2 PRDATA [6] $end
+$var wire 1 3 PRDATA [5] $end
+$var wire 1 4 PRDATA [4] $end
+$var wire 1 5 PRDATA [3] $end
+$var wire 1 6 PRDATA [2] $end
+$var wire 1 7 PRDATA [1] $end
+$var wire 1 8 PRDATA [0] $end
+$var wire 1 9 PREADY $end
+$var reg 3 : state [2:0] $end
+$upscope $end
+
+$scope module slave $end
+$var wire 1 ; PCLK $end
+$var wire 1 < PRESETn $end
+$var wire 1 = PSEL $end
+$var wire 1 > PENABLE $end
+$var wire 1 ? PWRITE $end
+$var wire 1 @ PADDR [7] $end
+$var wire 1 A PADDR [6] $end
+$var wire 1 B PADDR [5] $end
+$var wire 1 C PADDR [4] $end
+$var wire 1 D PADDR [3] $end
+$var wire 1 E PADDR [2] $end
+$var wire 1 F PADDR [1] $end
+$var wire 1 G PADDR [0] $end
+$var wire 1 H PWDATA [7] $end
+$var wire 1 I PWDATA [6] $end
+$var wire 1 J PWDATA [5] $end
+$var wire 1 K PWDATA [4] $end
+$var wire 1 L PWDATA [3] $end
+$var wire 1 M PWDATA [2] $end
+$var wire 1 N PWDATA [1] $end
+$var wire 1 O PWDATA [0] $end
+$var reg 8 P PRDATA [7:0] $end
+$var reg 1 Q PREADY $end
+$var reg 8 R reg0 [7:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0!
+1"
+0#
+0$
+0%
+b0 &
+b0 '
+b0 (
+1)
+0,
+0-
+0.
+b0 /
+b0 0
+b0 :
+b0 P
+1Q
+b0 R
+0O
+0N
+0M
+0L
+0K
+0J
+0I
+0H
+0G
+0F
+0E
+0D
+0C
+0B
+0A
+0@
+0?
+0>
+0=
+0<
+0;
+19
+08
+07
+06
+05
+04
+03
+02
+01
+1+
+0*
+$end
+#1000
+0"
+0+
+1<
+#10000
+1!
+1*
+1;
+1,
+1.
+b1000 /
+b10100101 0
+b1 :
+b10100101 '
+b1000 &
+1%
+1#
+1D
+1O
+1M
+1J
+1H
+1?
+1=
+#20000
+0!
+0*
+0;
+#30000
+1!
+1*
+1;
+1-
+b10 :
+1$
+1>
+#40000
+0!
+0*
+0;
+#50000
+1!
+1*
+1;
+b10100101 R
+0,
+0-
+b11 :
+0$
+0#
+0>
+0=
+b10100101 P
+b10100101 (
+18
+16
+13
+11
+#60000
+0!
+0*
+0;
+#70000
+1!
+1*
+1;
+1,
+0.
+1-
+b100 :
+1$
+0%
+1#
+1>
+0?
+1=
+#80000
+0!
+0*
+0;
+#90000
+1!
+1*
+1;
+0,
+0-
+b0 :
+0$
+0#
+0>
+0=
+#100000
+0!
+0*
+0;
+#110000
+1!
+1*
+1;
+1,
+1.
+b1 :
+1%
+1#
+1?
+1=
+#120000
+0!
+0*
+0;
+#130000
+1!
+1*
+1;
+1-
+b10 :
+1$
+1>
+#140000
+0!
+0*
+0;
+#150000
+1!
+1*
+1;
+0,
+0-
+b11 :
+0$
+0#
+0>
+0=
+#160000
+0!
+0*
+0;
+#170000
+1!
+1*
+1;
+1,
+0.
+1-
+b100 :
+1$
+0%
+1#
+1>
+0?
+1=
+#180000
+0!
+0*
+0;
+#190000
+1!
+1*
+1;
+0,
+0-
+b0 :
+0$
+0#
+0>
+0=
+#200000
+0!
+0*
+0;
+#210000
+1!
+1*
+1;
+1,
+1.
+b1 :
+1%
+1#
+1?
+1=
+#220000
+0!
+0*
+0;
+#230000
+1!
+1*
+1;
+1-
+b10 :
+1$
+1>
+#240000
+0!
+0*
+0;
+#250000
+1!
+1*
+1;
+0,
+0-
+b11 :
+0$
+0#
+0>
+0=
+#260000
+0!
+0*
+0;
+#270000
+1!
+1*
+1;
+1,
+0.
+1-
+b100 :
+1$
+0%
+1#
+1>
+0?
+1=
+#280000
+0!
+0*
+0;
+#290000
+1!
+1*
+1;
+0,
+0-
+b0 :
+0$
+0#
+0>
+0=
+#300000
+0!
+0*
+0;
+#310000
+1!
+1*
+1;
+1,
+1.
+b1 :
+1%
+1#
+1?
+1=
+#320000
+0!
+0*
+0;
+#330000
+1!
+1*
+1;
+1-
+b10 :
+1$
+1>
+#340000
+0!
+0*
+0;
+#350000
+1!
+1*
+1;
+0,
+0-
+b11 :
+0$
+0#
+0>
+0=
+#360000
+0!
+0*
+0;
+#370000
+1!
+1*
+1;
+1,
+0.
+1-
+b100 :
+1$
+0%
+1#
+1>
+0?
+1=
+#380000
+0!
+0*
+0;
+#390000
+1!
+1*
+1;
+0,
+0-
+b0 :
+0$
+0#
+0>
+0=
+#400000
+0!
+0*
+0;
+#410000
+1!
+1*
+1;
+1,
+1.
+b1 :
+1%
+1#
+1?
+1=
+#420000
+0!
+0*
+0;
+#430000
+1!
+1*
+1;
+1-
+b10 :
+1$
+1>
+#440000
+0!
+0*
+0;
+#450000
+1!
+1*
+1;
+0,
+0-
+b11 :
+0$
+0#
+0>
+0=
+#460000
+0!
+0*
+0;
+#470000
+1!
+1*
+1;
+1,
+0.
+1-
+b100 :
+1$
+0%
+1#
+1>
+0?
+1=
+#480000
+0!
+0*
+0;
+#490000
+1!
+1*
+1;
+0,
+0-
+b0 :
+0$
+0#
+0>
+0=
