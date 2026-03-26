@@ -12,19 +12,31 @@ module apb_slave (
 
     logic [7:0] reg0;
 
+    // Always ready
     assign PREADY = 1'b1;
 
-    // Write on ACCESS phase
     always_ff @(posedge PCLK or negedge PRESETn) begin
-        if (!PRESETn)
-            reg0 <= 8'h00;
-        else if (PSEL && PENABLE && PWRITE && (PADDR == 8'h08))
-            reg0 <= PWDATA;
-    end
+        if (!PRESETn) begin
+            reg0   <= 8'h00;
+            PRDATA <= 8'h00;
+        end else begin
 
-    // PRDATA always shows register value
-    always_comb begin
-        PRDATA = reg0;
+            // -------- WRITE --------
+            if (PSEL && PENABLE && PWRITE) begin
+                if (PADDR == 8'h08)
+                    reg0 <= PWDATA;
+            end
+
+            // -------- READ --------
+            if (PSEL && PENABLE && !PWRITE) begin
+                if (PADDR == 8'h08)
+                    PRDATA <= reg0;
+                else
+                    PRDATA <= 8'h00;
+            end
+
+            // ❗ No update outside ACCESS
+        end
     end
 
 endmodule
