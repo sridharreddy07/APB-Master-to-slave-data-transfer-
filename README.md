@@ -1,9 +1,9 @@
 APB protocol 
-🔷 What is APB?
+ What is APB?
 
 APB (Advanced Peripheral Bus) is part of the ARM AMBA family.
 
-👉 It is used for:
+It is used for:
 
 Low-speed peripherals
 Simple control/status registers
@@ -13,7 +13,7 @@ Examples:
 UART
 Timer
 GPIO
-🔑 Key APB Signals
+ Key APB Signals
 From Master → Slave
 PSEL → Select slave
 PENABLE → Indicates ACCESS phase
@@ -24,30 +24,30 @@ From Slave → Master
 PRDATA → Read data
 PREADY → Slave ready
 PSLVERR → Error (optional)
-🔥 APB Transfer Protocol (VERY IMPORTANT)
+APB Transfer Protocol (VERY IMPORTANT)
 
 APB works in 2 phases only:
 
-🟡 1. SETUP Phase
+ 1. SETUP Phase
 PSEL = 1
 PENABLE = 0
 
-👉 Master sets:
+ Master sets:
 
 Address
 Write/Read control
 Write data (if write)
 
-🔵 2. ACCESS Phase
+ 2. ACCESS Phase
 PSEL = 1
 PENABLE = 1
 
-👉 This is the actual transfer phase
+ This is the actual transfer phase
 
 If WRITE → slave captures data
 If READ → slave drives PRDATA
 
-👉 Transfer completes only when:
+ Transfer completes only when:
 
 PSEL = 1 AND PENABLE = 1 AND PREADY = 1
 
@@ -60,7 +60,7 @@ During:
 
 PSEL = 1, PENABLE = 1
 
-👉 These must NOT change:
+ These must NOT change:
 PADDR
 PWRITE
 PWDATA
