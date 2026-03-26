@@ -18,39 +18,45 @@ module apb_master (
         WRITE_SETUP,
         WRITE_ACCESS,
         READ_SETUP,
-        READ_ACCESS
+        READ_ACCESS,
+        READ_DONE,
+        DONE
     } state_t;
 
     state_t state;
+    logic [7:0] read_data_reg;
+    logic done_printed;
 
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            state   <= IDLE;
-            PSEL    <= 0;
-            PENABLE <= 0;
-            PWRITE  <= 0;
-            PADDR   <= 0;
-            PWDATA  <= 0;
+            state         <= IDLE;
+            PSEL          <= 0;
+            PENABLE       <= 0;
+            PWRITE        <= 0;
+            PADDR         <= 0;
+            PWDATA        <= 0;
+            read_data_reg <= 0;
+            done_printed  <= 0;
         end else begin
             case (state)
 
-                // ---------------- IDLE ----------------
+                // -------- IDLE --------
                 IDLE: begin
                     PSEL    <= 1;
                     PWRITE  <= 1;
                     PADDR   <= 8'h08;
                     PWDATA  <= 8'hA5;
-                    PENABLE <= 0;          // SETUP
+                    PENABLE <= 0;
                     state   <= WRITE_SETUP;
                 end
 
-                // ---------------- WRITE SETUP ----------------
+                // -------- WRITE SETUP --------
                 WRITE_SETUP: begin
-                    PENABLE <= 1;          // ACCESS
+                    PENABLE <= 1;
                     state   <= WRITE_ACCESS;
                 end
 
-                // ---------------- WRITE ACCESS ----------------
+                // -------- WRITE ACCESS --------
                 WRITE_ACCESS: begin
                     if (PREADY) begin
                         PSEL    <= 0;
@@ -59,23 +65,44 @@ module apb_master (
                     end
                 end
 
-                // ---------------- READ SETUP ----------------
+                // -------- READ SETUP --------
                 READ_SETUP: begin
                     PSEL    <= 1;
                     PWRITE  <= 0;
                     PADDR   <= 8'h08;
-                    PENABLE <= 1;          // <-- assert PENABLE here
+                    PENABLE <= 0;
                     state   <= READ_ACCESS;
                 end
 
-                // ---------------- READ ACCESS ----------------
+                // -------- READ ACCESS --------
                 READ_ACCESS: begin
-                    // PENABLE already 1 from previous cycle
+                    PENABLE <= 1;
+
                     if (PREADY) begin
-                        $display("Time %0t : Read Data = %h", $time, PRDATA);
-                        PSEL    <= 0;
-                        PENABLE <= 0;
-                        state   <= IDLE;
+                        // ✅ Capture while signals still HIGH
+                        read_data_reg <= PRDATA;
+                        state <= READ_DONE;   // move to next cycle BEFORE deassert
+                    end
+                end
+
+                // -------- HOLD ONE CYCLE --------
+                READ_DONE: begin
+                    // Keep PSEL & PENABLE HIGH for full valid cycle
+                    PSEL    <= 1;
+                    PENABLE <= 1;
+
+                    state <= DONE;
+                end
+
+                // -------- DONE --------
+                DONE: begin
+                    // Now safely deassert
+                    PSEL    <= 0;
+                    PENABLE <= 0;
+
+                    if (!done_printed) begin
+                        $display("Time %0t : READ DATA = 0x%0h", $time, read_data_reg);
+                        done_printed <= 1;
                     end
                 end
 
